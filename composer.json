@@ -14,7 +14,8 @@
         "laravel/scout": "^9.0",
         "laravel/tinker": "^2.5",
         "ext-mysqli": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "yajra/laravel-oci8": "8.*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

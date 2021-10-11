@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TestUser;
-use App\Http\Controllers\Controller;
+use App\Modules\DigitalWin\EnShi\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 

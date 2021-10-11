@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Controllers;
+namespace App\Modules\DigitalWin\EnShi\Controllers;
 
 use App\Helpers\Func;
-use App\Http\Controllers\Controller;
 use App\Models\ToBaseModel;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjStorageIn;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjStorageInItem;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjStorageOut;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjStorageOutItem;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjStorageIn;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjStorageInItem;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjStorageOut;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjStorageOutItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 //出入库
 class TaskController extends Controller

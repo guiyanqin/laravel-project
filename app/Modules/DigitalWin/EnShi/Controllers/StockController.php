@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Controllers;
+namespace App\Modules\DigitalWin\EnShi\Controllers;
 
 use App\Helpers\Func;
+
 use App\Http\Controllers\Controller;
 use App\Models\ToBaseModel;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\YspylocationTomesViews;
+use App\Modules\DigitalWin\EnShi\Models\YspylocationTomesViews;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\Location;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjInsectRecord;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjStorageIn;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjStorageOut;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmMesStock;
+use App\Modules\DigitalWin\EnShi\Models\Location;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjInsectRecord;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjStorageIn;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjStorageOut;
+use App\Modules\DigitalWin\EnShi\Models\VmDmMesStock;
 
 
 //库存
@@ -362,11 +364,11 @@ class StockController extends Controller
         Func::ajaxSuccess('', $result);
     }
 
-    //物料检索
+    //货物详情+货物数量
     public function search(Request $request)
     {
         $where = [
-            //trim() 函数移除字符串两侧的空白字符或其他预定义字符。
+
             'name' => trim($request->get('name', '')),
             'code' => trim($request->get('code', '')),
             'build' => (int)$request->get('build', 0),
@@ -385,7 +387,7 @@ class StockController extends Controller
             'weight_total' => 0, //总重量
             'bear_total' => 0,  //总担数
         ];
-        //遍历给定的 data 数组。每次循环中，当前单元的值被赋给 $item 并且数组内部的指针向前移一步（因此下一次循环中将会得到下一个单元）。
+
         foreach($data as $item) {
             $info[$item->location_name] = [
                 'item_name' => $item->yl_desc,               //物料名称
@@ -396,10 +398,11 @@ class StockController extends Controller
                 'amount' => intval($item->amount),           //件数
                 'weight' => intval($item->weight),           //重量
                 'bear' => intval($item->weight/50),      //担数
-                'level' => $item->gradestructuredesc,        //等级
-                'type' => $item->type,                       //烟叶类型
-                'shape' => $item->shape,                     //烟叶形态
-                'qc_status' => $item->qc_status == 1?'合格':'不合格',       //质检状态
+
+//                'level' => $item->gradestructuredesc,        //等级
+//                'type' => $item->type,                       //烟叶类型
+//                'shape' => $item->shape,                     //烟叶形态
+//                'qc_status' => $item->qc_status == 1?'合格':'不合格',       //质检状态
             ];
             $statistics['amount_total'] += $item->amount;
             $statistics['weight_total'] += $item->weight;
@@ -429,13 +432,12 @@ class StockController extends Controller
             'month' => ['format'=>'Y-m', 'len' => 365]
         ];
         $type = $request->get('type', 'day');
-        $total = round($this->stock->getTotal('WEIGHT'));
-        $inData = (new VmDmGfgjStorageIn())->inLog($arr[$type]['len']);
-        $outData = (new VmDmGfgjStorageOut())->outLog($arr[$type]['len']);
-        //var_dump($inData->toArray());exit;
+        $total = round($this->stock->getTotal("WEIGHT"));
+        $data = (new VmDmGfgjStorageOut())->outLog($arr[$type]['len']);
+        //var_dump($date->toArray());exit;
 
         $result = [];
-        foreach($outData  as $item){
+        foreach($data as $item){
             $date = date($arr[$type]['format'],strtotime($item->bill_date));
             if(empty($result[$date])) {
                 $result[$date] = ['name' => $date, 'value' => 0, 'num' => 0, 'total' => $total];
@@ -445,6 +447,13 @@ class StockController extends Controller
         }
         sort($result);
         Func::ajaxSuccess('', $result);
+    }
+
+    //分区状态获取
+    public function getPartition()
+    {
+
+
     }
 
     //虫群诱捕器位置

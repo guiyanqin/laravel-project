@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Models;
+namespace App\Modules\DigitalWin\EnShi\Models;
 
 use App\Models\ToBaseModel;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,10 +24,21 @@ class VmDmMesStock extends ToBaseModel
             ->where('AREA_ID', '!=', '1426');
     }
     //库存总量
-    public function getTotal(): int
+    public function getTotal($key = 'amount', $where = [], $judge = '')
     {
+        //调用defaultQuery()方法，获取广丰下溪的数据
         $query = $this->defaultQuery();
-        return $query->sum('AMOUNT');
+        if(!empty($where)){
+            foreach($where as $k => $item){
+                if(is_array($item)){
+                    //is_array() 函数用来判断一个变量是否是数组
+                    $query = $query->where($k, $item[0], $item[1]);
+                }else{
+                    $query = $query->where($k, '=', $item);
+                }
+            }
+        }
+        return $query->sum($key);
     }
 
     //获取选项

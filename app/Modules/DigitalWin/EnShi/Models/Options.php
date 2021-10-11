@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Models;
+namespace App\Modules\DigitalWin\EnShi\Models;
 use \Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Models\BaseModel;
 

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Controllers;
+namespace App\Modules\DigitalWin\EnShi\Controllers;
 
 
 use App\Models\ToBaseModel;

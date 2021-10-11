@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Controllers;
+namespace App\Modules\DigitalWin\EnShi\Controllers;
 
 use App\Helpers\Func;
+
 use App\Http\Controllers\Controller;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\Setting;
+use App\Modules\DigitalWin\EnShi\Models\Setting;
 
 use Illuminate\Http\Request;
 

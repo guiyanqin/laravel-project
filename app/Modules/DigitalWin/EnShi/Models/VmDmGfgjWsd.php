@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Models;
+namespace App\Modules\DigitalWin\EnShi\Models;
 
 use App\Models\ToBaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,7 +64,7 @@ class VmDmGfgjWsd extends ToBaseModel
         return $query->groupBy(['LOCATIONNAME'])->get();
     }
 
-    public function getCladdingData($areaId = 0, $timeStr = '',$len =3)
+    public function getCladdingData($areaId = 0, $timeStr = '')
     {
 
         $select = ['TAGID','GETDATE','TEMPREALVALUE','AREAID','LOCATIONNAME'];
@@ -92,6 +92,28 @@ class VmDmGfgjWsd extends ToBaseModel
     {
 
         return DB::select('SELECT TAGID as tagid,GETDATE as get_date,TEMPREALVALUE as tempreavalue,AREAID as area_id,LOCATIONNAME as locationname FROM vm_dm_gfgj_wsd v WHERE GETDATE IN ( SELECT MAX(GETDATE) FROM vm_dm_gfgj_wsd GROUP BY AREAID HAVING COUNT( * ) > 1 ) AND DEVICETYPE != 4');
+    }
+
+    public function getGas($areaId = 0, $timeStr = ''){
+        $select = ['TAGID','GETDATE','TEMPREALVALUE','AREAID','LOCATIONNAME'];
+        $query = $this->newQuery()
+            ->from('vm_dm_gfgj_wsd as v')
+            ->select($select)
+            ->whereNotExists(function($query)
+            {
+                $len = 3;
+                $timeStr = date("Y-m-d", strtotime("-".$len." days"));
+                $query->from('vm_dm_gfgj_wsd')
+                    ->select(DB::raw(1))
+                    ->where('GETDATE','<',$timeStr)
+                    ->where('AREAID','=','v.AREAID')
+                    ->get()
+                ;
+            })
+            ->where('DEVICETYPE','!=','4')
+            ->groupBy('LOCATIONNAME');
+        return $query->orderBy('GETDATE','DESC')->get();
+
     }
 
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Controllers;
-use App\Http\Controllers\Controller;
+namespace App\Modules\DigitalWin\EnShi\Controllers;
+use App\Modules\DigitalWin\EnShi\Controllers\Controller;
 use App\Helpers\Func;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\VmDmGfgjWsd;
+use App\Modules\DigitalWin\EnShi\Models\VmDmGfgjWsd;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -158,6 +158,7 @@ class TemperatureHumidController extends Controller
         Func::ajaxSuccess('', $result);
     }
 
+    //包芯温度
     public function claddingDate(Request $request)
     {
         //传入数据
@@ -181,6 +182,31 @@ class TemperatureHumidController extends Controller
         Func::ajaxSuccess('', $result);
 
     }
+
+    //气体浓度
+    public function getGas(Request $request){
+        //传入数据
+        $build = $request->get('build', 753);   //栋
+        $layer = $request->get('layer', 785);   //层
+        $timeStr = date('Y-m-d');
+
+        //获取数据
+        $data = $this->model->getGas($layer, $timeStr.' 00:00:00');
+
+        $result = [];
+
+        foreach($data as $item){
+            $result[] = [
+                'name' => $item->locationname,
+                'temperature' => round($item->total/$item->num, 2),
+                't_status' => '使用中',
+                'date' => $timeStr,
+            ];
+        }
+
+        Func::ajaxSuccess('', $result);
+    }
+
 
 
 }

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'oracle'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,24 @@ return [
                 PDO::ATTR_CASE => PDO::CASE_LOWER,
             ]) : [],
         ],
+
+
+        'oracle' => [
+            'driver'         => 'oracle',
+            //'tns'            => env('OR1_DB_TNS', ''),
+            'host'           => env('OR_DB_HOST', '192.168.3.33'),
+            'port'           => env('OR_DB_PORT', '1521'),
+            'service_name'   => env('OR_SERVICE_NAME', 'ORCL'),
+            'database'       => env('OR_DB_DATABASE', 'C##NTIWMS'),
+            'username'       => env('OR_DB_USERNAME', 'C##NTIWMS'),
+            'password'       => env('OR_DB_PASSWORD', '1111'),
+            'charset'        => env('OR_DB_CHARSET', 'utf8'),
+            'prefix'         => env('OR_DB_PREFIX', ''),
+            'prefix_schema'  => env('OR_DB_SCHEMA_PREFIX', ''),
+            //'edition'        => env('OR1_DB_EDITION', 'ora$base'),
+            //'server_version' => env('OR_DB_SERVER_VERSION', '12c'),
+        ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',

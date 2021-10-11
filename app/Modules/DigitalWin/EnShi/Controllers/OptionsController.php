@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Controllers;
+namespace App\Modules\DigitalWin\EnShi\Controllers;
 
 use App\Helpers\Exceptions\ControllerException;
 use App\Helpers\Func;
-use App\Http\Controllers\Controller;
-use App\Modules\DigitalWin\GuangFengXiaXi\Models\Options;
+
+use App\Modules\DigitalWin\EnShi\Models\Options;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 //含水率检测
 //烟叶形态、年份、结构的增删改查

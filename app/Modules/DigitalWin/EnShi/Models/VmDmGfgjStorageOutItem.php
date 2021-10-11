@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\DigitalWin\GuangFengXiaXi\Models;
+namespace App\Modules\DigitalWin\EnShi\Models;
 
 use App\Models\ToBaseModel;
 //use Illuminate\Database\Eloquent\Factories\HasFactory;

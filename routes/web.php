@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+use App\Modules\DigitalWin\EnShi\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +28,7 @@ Route::get('/user', function () {
 //调用控制器
 Route::get('/user1', 'App\Http\Controllers\UserController@index');
 
-use App\Http\Controllers\UserController;
+use App\Modules\DigitalWin\EnShi\Controllers\UserController;
 
 Route::get('/user2', [UserController::class, 'index']);
 

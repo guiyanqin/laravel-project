@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Modules\DigitalWin\EnShi\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Modules\DigitalWin\EnShi\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller

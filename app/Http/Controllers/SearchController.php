@@ -5,7 +5,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Models\Articles;
 use Illuminate\Support\Facades\Input;
-use App\Http\Controllers\Controller;
+use App\Modules\DigitalWin\EnShi\Controllers\Controller;
 
 
 class SearchController extends Controller
